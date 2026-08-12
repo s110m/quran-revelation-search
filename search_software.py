@@ -1,10 +1,7 @@
 import sys
-sys.stdout.reconfigure(encoding='utf-8')
-import pandas as pd
-import arabic_reshaper
-from bidi.algorithm import get_display
-import matplotlib.pyplot as plt
-from matplotlib import cm
+if sys.stdout is not None and hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
 from collections import defaultdict
 import re
 from pathlib import Path
@@ -907,18 +904,25 @@ def find_multiple_ayahs(queries, table):
 
 
 def rtl(text):
+    import arabic_reshaper
+    from bidi.algorithm import get_display
+
     return get_display(arabic_reshaper.reshape(text))
 
 
 
 
 def build_year_color_map(results):
+    from matplotlib import cm
+
     years = list(dict.fromkeys(r["سال نزول"] for r in results))  # حفظ ترتیب
     cmap = cm.get_cmap("Pastel1", len(years))
     return {year: cmap(i) for i, year in enumerate(years)}
 
 
 def show_results_figure_rtl(results, title="نتایج جستجو"):
+    import matplotlib.pyplot as plt
+
     if not results:
         print("یافت نشد")
         return

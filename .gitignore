@@ -3,6 +3,8 @@ seire_tahavole_quran.rar
 main.tex
 
 /build
+/dist
+/.build-venv
 
 /outputs
 
@@ -23,8 +25,6 @@ nezame_hooshman.DOCX
 .pytest_chche
 
 __pycache__
-
-/tests
 
 tmp
 
